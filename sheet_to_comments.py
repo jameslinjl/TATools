@@ -3,10 +3,12 @@ import gspread, os
 username = raw_input('Username: ')
 password = raw_input('Password: ')
 
+print "Logging into Google Drive"
 gc = gspread.login(username, password)
 
 wks = gc.open("HW1 Grades").sheet1
 
+print "Downloading Data Ranges..."
 list1 = wks.range('C2:C252')
 list2 = wks.range('D2:D252')
 list3 = wks.range('E2:E252')
@@ -21,6 +23,7 @@ comment_list = wks.range('L2:L252')
 os.chdir("./Homework 1")
 dirList = os.listdir("./")
 
+print "Writing Data Ranges to File..."
 i = 0
 while i < len(list1):
 	os.chdir("./" + str(dirList[i+1]))
