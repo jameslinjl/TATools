@@ -25,6 +25,7 @@ list7 = wks.range('I104:I199')
 list8 = wks.range('J104:J199')
 list9 = wks.range('K104:K199')
 comment_list = wks.range('L104:L199')
+list10 = wks.range('O104:O199')
 
 #Start email script
 print "Start sending emails"
@@ -56,6 +57,7 @@ while i < len(recvaddrlst):
 	msg = msg + "Program 1: " + str(list7[i].value) + "/20\n"
 	msg = msg + "Program 2: " + str(list8[i].value) + "/20\n"
 	msg = msg + "Program 3: " + str(list9[i].value) + "/20\n\n"
+	msg = msg + "Total: " + str(list10[i].value) + "/100\n\n"
 	msg = msg + "Comments: \n" + (comment_list[i].value).encode('utf-8') + "\n\n\n"
 	msg = msg + "--James Lin, Head TA"
 	i = i + 1
