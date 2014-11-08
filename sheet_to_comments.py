@@ -14,6 +14,7 @@ wks = gc.open(filename).sheet1
 
 #Download
 print "Downloading Data Ranges..."
+list0 = wks.range('O2:O199')
 list1 = wks.range('C2:C199')
 list2 = wks.range('D2:D199')
 list3 = wks.range('E2:E199')
@@ -26,7 +27,7 @@ list9 = wks.range('K2:K199')
 comment_list = wks.range('L2:L199')
 
 #Switch into correct directory and get list of directories
-os.chdir("./Homework 2-1")
+os.chdir("./Homework 3")
 dirList = os.listdir("./")
 
 #Write to file
@@ -35,15 +36,16 @@ i = 0
 while i < len(list1):
 	os.chdir("./" + str(dirList[i+1]))
 	with open("comments.txt", "w") as myfile:
+		myfile.write("Total: " + str(list0[i].value) + "/100\n\n")
 		myfile.write("Written 1: " + str(list1[i].value) + "/10\n")
 		myfile.write("Written 2: " + str(list2[i].value) + "/5\n")
 		myfile.write("Written 3: " + str(list3[i].value) + "/5\n")
-		myfile.write("Written 4: " + str(list4[i].value) + "/10\n")
+		myfile.write("Written 4: " + str(list4[i].value) + "/5\n")
 		myfile.write("Written 5: " + str(list5[i].value) + "/5\n")
-		myfile.write("Written 6: " + str(list6[i].value) + "/5\n")
-		myfile.write("Program 1: " + str(list7[i].value) + "/20\n")
-		myfile.write("Program 2: " + str(list8[i].value) + "/20\n")
-		myfile.write("Program 3: " + str(list9[i].value) + "/20\n\n")
+		myfile.write("Written 6: " + str(list6[i].value) + "/10\n")
+		myfile.write("Written 7: " + str(list7[i].value) + "/10\n")
+		myfile.write("Program 1: " + str(list8[i].value) + "/25\n")
+		myfile.write("Program 2: " + str(list9[i].value) + "/25\n\n")
 
 		myfile.write("Comments: " + (comment_list[i].value).encode('utf-8'))
 	os.chdir("..")
