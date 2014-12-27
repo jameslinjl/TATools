@@ -17,3 +17,11 @@ utilizes smtplib, which is the standard Python library for sending emails over S
 After reading in all the information from Google Docs/Drive, the script sends out
 emails over a list of UNIs (used to form your Columbia email). This will be used to
 send out grade reports for assignments.
+
+<b>selenium script</b>
+
+This encompasses both push_grades.sh as well as download_grade_zip.py. These
+two scripts use Selenium to try and automate the transfer and pushing of
+grades from Google Drive directly to Columbia's Courseworks system. The scripts
+are not working quite yet because of issues with iframes in Columbia's 
+Courseworks system. More work to be done on this still!
