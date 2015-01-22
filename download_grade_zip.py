@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-import os
+import os, getpass
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from time import sleep
 
 #create firefox profile for auto download and save
 def get_firefox_profile():
@@ -64,7 +63,7 @@ def run_driver(prof, uname, pword):
 def main():
     
     username = raw_input('UNI: ')
-    password = raw_input('Password: ')
+    password = getpass.getpass(prompt='Password: ')
 
     profile = get_firefox_profile()
 
