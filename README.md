@@ -10,7 +10,7 @@ the information to a .txt file which can be directly uploaded to Columbia Univer
 Courseworks comment section. The script is to be run from the same level as the 
 downloaded batch homework folder.
 
-<b>mailscript.py</b>
+<b>mail_script.py</b>
 
 This is another short Python script which interacts with Google Spreadsheet. It also
 utilizes smtplib, which is the standard Python library for sending emails over SMTP.
@@ -18,10 +18,10 @@ After reading in all the information from Google Docs/Drive, the script sends ou
 emails over a list of UNIs (used to form your Columbia email). This will be used to
 send out grade reports for assignments.
 
-<b>selenium script</b>
+<b>selenium_script.py</b>
 
-This encompasses both push_grades.sh as well as download_grade_zip.py. These
-two scripts use Selenium to try and automate the transfer and pushing of
-grades from Google Drive directly to Courseworks. The first selenium portion
-of the scipt is working which is great news. Now this script needs to be 
-expanded upon to perform actually import and exporting.
+This encompasses push_grades.sh, selenium_script.py, and csv_script.py. These scripts
+use various Python modules (building off of the work above) in order to download the
+grading zip file from Courseworks, change the scores according to Google Spreadsheet,
+and then upload the zip file back to Courseworks. Selenium is the primary driver for
+this script.
