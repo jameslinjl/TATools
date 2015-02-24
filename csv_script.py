@@ -3,26 +3,29 @@
 from tempfile import NamedTemporaryFile
 import shutil
 import csv
-import gspread, getpass
+import gspread
+import getpass
+
 
 def pull_gspread():
 
-    #Get Google Drive credentials
+    # Get Google Drive credentials
     username = raw_input('Drive Username: ')
     password = getpass.getpass(prompt='Drive Password: ')
     filename = raw_input('Drive Filename: ')
     column_number = raw_input('Total Grade Column Number: ')
 
-    #Log in
+    # Log in
     print "Logging into Google Drive"
     gc = gspread.login(username, password)
 
-    #Open sheet
+    # Open sheet
     wks = gc.open(filename).sheet1
 
-    #Download
+    # Download
     print "Downloading Data Ranges..."
     return wks.col_values(int(column_number))
+
 
 def edit_csv(grades):
 
@@ -47,6 +50,7 @@ def edit_csv(grades):
             i = i + 1
 
     shutil.move(tempfile.name, filename)
+
 
 def main():
     grade_data = pull_gspread()

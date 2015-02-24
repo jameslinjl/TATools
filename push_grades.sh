@@ -21,7 +21,7 @@ done
 unzip bulk_download.zip
 
 # cd into homework directory
-cd Homework*
+cd *Problem*
 
 # move grades.csv into previous directory
 mv grades.csv ..
@@ -37,9 +37,9 @@ python csv_script.py
 # python mailscript.py
 
 # zip all the stuff up
-mv grades.csv Homework*
+mv grades.csv *Problem*
 rm upload.zip &> /dev/null
-zip -r upload Homework*
+zip -r upload *Problem*
 
 # selenium script to upload
 python selenium_script.py 2
