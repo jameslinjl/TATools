@@ -4,6 +4,7 @@ import smtplib
 import gspread
 import getpass
 import os
+import time
 
 
 # Get Google Drive credentials
@@ -45,8 +46,9 @@ server.login(username, password)
 
 # Write actual email
 subject = "[DO NOT REPLY] " + str(assignment_name) + " Grading Report"
-i = 0
+i = 1
 while i < len(columns[0]):
+
 	recvaddr = columns[0][i] + "@columbia.edu"
 	msg = "From : %s\nTo: %s\nSubject: %s\n" %(fromaddr, recvaddr, subject)
 	msg = msg + ("Hi!\n\nHere is your " + str(assignment_name) + " Grade " + 
@@ -60,8 +62,10 @@ while i < len(columns[0]):
 
 	j = 1
 	while(j < (int(column_number))-1):
-		msg = msg + (columns[j][0] + ": " + 
-			  str(columns[j][i]).encode('utf-8') + "\n")
+		if columns[j][i] is None:
+			columns[j][i] = ''
+		msg = (msg + (columns[j][0] + ": " + 
+			  columns[j][i].encode('utf-8')) + "\n")
 		j = j + 1
 
 	msg = msg + "\n\n--James Lin, Head TA"
@@ -73,3 +77,5 @@ while i < len(columns[0]):
 		print "Successful send to " + recvaddr
 	except smtplib.SMTPException:
 		print "Error: unable to send"
+		time.sleep(60)
+		i = i - 1
