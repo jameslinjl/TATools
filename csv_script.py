@@ -45,7 +45,7 @@ def edit_csv(grades):
 
         i = 1
         for row in reader:
-            row[4] = int(grades[i])
+            row[4] = float(grades[i])
             writer.writerow(row)
             i = i + 1
 
