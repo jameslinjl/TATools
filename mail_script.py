@@ -37,17 +37,19 @@ server.ehlo()
 server.starttls()
 
 # Get email credentials
-username = raw_input('Email Username: ')
-password = getpass.getpass(prompt='Email Password: ')
-fromaddr = raw_input('Sender Address: ')
+# username = raw_input('Email Username: ')
+# password = getpass.getpass(prompt='Email Password: ')
+# fromaddr = raw_input('Sender Address: ')
+fromaddr = username
 
 # Log in to the server
 server.login(username, password)
 
 # Write actual email
 subject = "[DO NOT REPLY] " + str(assignment_name) + " Grading Report"
-i = 1
+i = 160
 while i < len(columns[0]):
+	# time.sleep(1)
 
 	recvaddr = columns[0][i] + "@columbia.edu"
 	msg = "From : %s\nTo: %s\nSubject: %s\n" %(fromaddr, recvaddr, subject)
@@ -78,4 +80,8 @@ while i < len(columns[0]):
 	except smtplib.SMTPException:
 		print "Error: unable to send"
 		time.sleep(60)
+		server = smtplib.SMTP('smtp.gmail.com', 587)
+		server.ehlo()
+		server.starttls()
+		server.login(username, password)
 		i = i - 1
