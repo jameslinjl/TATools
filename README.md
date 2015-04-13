@@ -1,5 +1,11 @@
 This repo is for little useful tools and scripts for doing TA stuff.
 
+<b>TODO and Bugs</b>
+- mail_script timeout not working, need to call in subprocess?
+- bash script flaky runs, needs closer look
+- password enters can be consolidated
+- incorporate upload comments into other scripts
+
 <b>sheet_to_comments.py</b>
 
 Uses gspread (Google Spreadsheets Python API - https://github.com/burnash/gspread)
