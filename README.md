@@ -1,33 +1,39 @@
+# TA Tools, Columbia University
+
 This repo is for little useful tools and scripts for doing TA stuff.
 
-<b>TODO and Bugs</b>
-- mail_script timeout not working, need to call in subprocess?
-- bash script flaky runs, needs closer look
-- password enters can be consolidated
-- incorporate upload comments into other scripts
+## Setup
 
-<b>sheet_to_comments.py</b>
+It's very important to have the correct setup to use this repo. Courseworks is not very friendly to scripting, so it requires the following of some precise conventions. These can almost certainly be improved upon, so you are welcome to do so. Expect the first running of the script to have issues and subsequent runs to go much more smoothly.
 
-Uses gspread (Google Spreadsheets Python API - https://github.com/burnash/gspread)
+Google Drive
+1. Make sure you are using Columbia University's LionDrive.
+2. Create a grading spreadsheet with a unique name with the following naming convention: <Course #><Spring/Summer/Fall><YEAR><Assignment Name>Grades . Example: 1004Spring2015Programming1Grades
+3. See attached spreadsheet for example of formatting.
 
-This is a short Python script which interacts with a Google Spreadsheet. After getting
-your username and password, the script will go through each provided cell and transfer
-the information to a .txt file which can be directly uploaded to Columbia University's
-Courseworks comment section. The script is to be run from the same level as the 
-downloaded batch homework folder.
+Courseworks (Columbia LMS)
+1. Ensure you have TA permission enabled by your professor.
+2. Make sure you and your professor are primarily using the 'Assignments' tab to create assignments rather than 'Gradebook'. These scripts will need to be modified in order to function with the latter.
+3. Currently, there are several hardcoded values that you need to track down within Courseworks. These are: course URL, assignments path, and main iframe. These will be hardcoded into lines 9, 10, and 11 of your cloned or forked version of selenium_script.py. Contact me if you have trouble locating these.
 
-<b>mail_script.py</b>
+## Basic Usage
 
-This is another short Python script which interacts with Google Spreadsheet. It also
-utilizes smtplib, which is the standard Python library for sending emails over SMTP.
-After reading in all the information from Google Docs/Drive, the script sends out
-emails over a list of UNIs (used to form your Columbia email). This will be used to
-send out grade reports for assignments.
+```bash
+./push_grades.sh
 
-<b>selenium_script.py</b>
+UNI: #enter uniXXXX
+Password: #enter uniPassword
+Assignment Listing CW: #enter 1 for top assignments listing, 2 for second, etc.
 
-This encompasses push_grades.sh, selenium_script.py, and csv_script.py. These scripts
-use various Python modules (building off of the work above) in order to download the
-grading zip file from Courseworks, change the scores according to Google Spreadsheet,
-and then upload the zip file back to Courseworks. Selenium is the primary driver for
-this script.
+# re-enter the above information again (can be optimized, see issues)
+```
+
+```bash
+python mail_script.py
+
+Drive Username: #enter uniXXXX@columbia.edu
+Drive Password: #enter your drive password, also the same as your LionMail device password
+Drive Filename: #enter exact name of grading spreadsheet
+Assignment Name: #enter name of assignment you want students to see
+Total Grade Column Number: #enter the number of the column (A is 1, B is 2, etc) which contains total grades, rest of spreadsheet is scraped accordingly
+```
