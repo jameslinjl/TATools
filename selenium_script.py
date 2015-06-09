@@ -6,6 +6,10 @@ import getpass
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+ds_cw_path = "https://courseworks.columbia.edu/portal/site/COMSW1004_001_2015_1"
+assignments_path = "/page/5d190245-f735-4305-9d27-a48e8ae32f93"
+main_iframe = "Main88dde526x6ef2x420ex8800x0632b672f0a1"
+assignment_listing = ''
 
 # create firefox profile for auto download and save
 def get_firefox_profile():
@@ -38,18 +42,21 @@ def login_courseworks(uname, pword, driver):
 
 
 def run_download_driver(uname, pword, driver):
+    global ds_cw_path
+    global assignments_path
+    global main_iframe
+    global assignment_listing
+
     login_courseworks(uname, pword, driver)
 
-    # open to assignments page
-    ds_cw_path = "https://courseworks.columbia.edu/portal/site/COMSW1004_001_2015_1"
-    assignments_path = "/page/5d190245-f735-4305-9d27-a48e8ae32f93"
+    # open to assignments pagepi
     driver.get(ds_cw_path)
     driver.get(ds_cw_path + assignments_path)
 
     # switch into iframe
     # open to homework 4 grades
-    driver.switch_to.frame("Main88dde526x6ef2x420ex8800x0632b672f0a1")
-    grade_button = driver.find_element_by_xpath("//form[@name='listAssignmentsForm']/table/tbody/tr[3]/td[2]/div/a[3]")
+    driver.switch_to.frame(main_iframe)
+    grade_button = driver.find_element_by_xpath("//form[@name='listAssignmentsForm']/table/tbody/tr[2]/td[" + assignment_listing + "]/div/a[3]")
     grade_button.click()
 
     # download all link
@@ -68,18 +75,21 @@ def run_download_driver(uname, pword, driver):
 
 
 def run_upload_driver(uname, pword, driver):
+    global ds_cw_path
+    global assignments_path
+    global main_iframe
+    global assignment_listing
+
     login_courseworks(uname, pword, driver)
 
     # open to assignments page
-    ds_cw_path = "https://courseworks.columbia.edu/portal/site/COMSW1004_001_2015_1"
-    assignments_path = "/page/5d190245-f735-4305-9d27-a48e8ae32f93"
     driver.get(ds_cw_path)
     driver.get(ds_cw_path + assignments_path)
 
     # switch into iframe
     # open to homework 4 grades
-    driver.switch_to.frame("Main88dde526x6ef2x420ex8800x0632b672f0a1")
-    grade_button = driver.find_element_by_xpath("//form[@name='listAssignmentsForm']/table/tbody/tr[3]/td[2]/div/a[3]")
+    driver.switch_to.frame(main_iframe)
+    grade_button = driver.find_element_by_xpath("//form[@name='listAssignmentsForm']/table/tbody/tr[2]/td[" + assignment_listing + "]/div/a[3]")
     grade_button.click()
 
     # upload all link
@@ -103,9 +113,12 @@ def run_upload_driver(uname, pword, driver):
 
 
 def main():
+    global assignment_listing
 
     username = raw_input('UNI: ')
     password = getpass.getpass(prompt='Password: ')
+    listing = int(raw_input('Assignment Listing CW: '))
+    assignment_listing = str(listing + 1)
 
     profile = get_firefox_profile()
     main_driver = webdriver.Firefox(firefox_profile=profile)

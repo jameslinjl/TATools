@@ -47,9 +47,8 @@ server.login(username, password)
 
 # Write actual email
 subject = "[DO NOT REPLY] " + str(assignment_name) + " Grading Report"
-i = 160
+i = 1
 while i < len(columns[0]):
-	# time.sleep(1)
 
 	recvaddr = columns[0][i] + "@columbia.edu"
 	msg = "From : %s\nTo: %s\nSubject: %s\n" %(fromaddr, recvaddr, subject)
