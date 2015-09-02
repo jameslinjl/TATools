@@ -6,10 +6,13 @@ import getpass
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+
+# HARD CODED VALUES ARE RIGHT HERE
 ds_cw_path = "https://courseworks.columbia.edu/portal/site/COMSW1004_001_2015_1"
 assignments_path = "/page/5d190245-f735-4305-9d27-a48e8ae32f93"
 main_iframe = "Main88dde526x6ef2x420ex8800x0632b672f0a1"
 assignment_listing = ''
+
 
 # create firefox profile for auto download and save
 def get_firefox_profile():
